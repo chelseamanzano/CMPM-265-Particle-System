@@ -1,5 +1,8 @@
 #pragma once
+#define _USE_MATH_DEFINES
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include <math.h>
 
 using namespace sf;
 using namespace std;
@@ -11,20 +14,22 @@ private:
 	float velocity;
 	float minVelocity = 10;
 	float minSize = 30;
-	int minAngle = -30;
-	int maxAngle = 30;
 	float angle;
-	Vector2f position;
+	float alphaValue = 255;
+	float decreaseAlpha;
+	bool isActive = false;
+	Vector2f startPosition;
 	Vector2f size;
 	Vector2f direction;
-	Vector2f emissionAngleRange;
+	Vector2i emissionAngleRange;
 	Texture particleTexture;
 
 public:
 	Particle();
-	Particle(Vector2f position);
+	Particle(Vector2f position, Vector2i emissionAngleRange, Texture particleTexture);
 	float lifetime;
 	void init();
+	void setActive(bool state);
 	void update(float dt);
 	void draw(RenderWindow & window);
 	void resetParticle();

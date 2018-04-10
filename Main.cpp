@@ -5,13 +5,13 @@
 #include <SFML/System.hpp>
 #include <SFML/OpenGL.hpp>
 #include <SFML/Main.hpp>
-#include "ParticleSystem.h"
+#include "ParticleSystemManager.h"
 
 using namespace sf;
 using namespace std;
 
-void update_state(float dt, ParticleSystem & ps);
-void render_frame(RenderWindow & window, ParticleSystem & ps);
+void update_state(float dt, ParticleSystemManager & psm);
+void render_frame(RenderWindow & window, ParticleSystemManager & psm);
 
 int main()
 {
@@ -19,7 +19,7 @@ int main()
 
 	srand(static_cast<unsigned>(time(NULL)));
 
-	ParticleSystem ps;
+	ParticleSystemManager psm;
 
 	Clock clock;
 
@@ -35,19 +35,19 @@ int main()
 		float dt = clock.restart().asSeconds();
 
 		window.clear();
-		update_state(dt, ps);
-		render_frame(window, ps);
+		update_state(dt, psm);
+		render_frame(window, psm);
 		window.display();
 	}
 
 	return 0;
 }
 
-void update_state(float dt, ParticleSystem & ps) {
-	ps.update(dt);
+void update_state(float dt, ParticleSystemManager & psm) {
+	psm.update(dt);
 }
 
-void render_frame(RenderWindow & window, ParticleSystem & ps) {
+void render_frame(RenderWindow & window, ParticleSystemManager & psm) {
 	window.clear(Color::Black);
-	ps.draw(window);
+	psm.draw(window);
 }

@@ -1,25 +1,18 @@
 #include "Particle.h"
 
 Particle::Particle() {
-	position = Vector2f(0, 0);
-	velocity = rand() % 30 + minVelocity;
-	size = Vector2f(rand() % 20 + minSize, rand() % 20 + minSize);
-	emissionAngleRange = Vector2f(rand() % minAngle, rand() % maxAngle);
-	lifetime = rand() % 10 + 1;
-	particleTexture.loadFromFile("resources/smoke-particle.png");
 }
 
-Particle::Particle(Vector2f position) {
-	this->position = position;
-	velocity = rand() % 30 + minVelocity;
-	size = Vector2f(rand() % 20 + minSize, rand() % 20 + minSize);
-	emissionAngleRange = Vector2f(rand() % minAngle, rand() % maxAngle);
+Particle::Particle(Vector2f position, Vector2i emissionAngleRange, Texture particleTexture) {
+	startPosition = position;
+	velocity = rand() % 20 + minVelocity;
+	size = Vector2f(30,30);
 	lifetime = rand() % 10 + 1;
-	particleTexture.loadFromFile("resources/smoke-particle.png");
-	bool angleWithinRange = false;
-    angle = rand() % 120 - 60;
-	direction.x = cos(angle);
-	direction.y = sin(angle);
+	decreaseAlpha = alphaValue / lifetime;
+	this->emissionAngleRange = emissionAngleRange;
+    angle = rand() % (emissionAngleRange.y + 1 - emissionAngleRange.x) + emissionAngleRange.x;
+	direction = Vector2f(cos(angle*M_PI / 180), sin(angle*M_PI / 180));
+	this->particleTexture = particleTexture;
 }
 
 void Particle::init() {
@@ -27,19 +20,32 @@ void Particle::init() {
 	particle.setOrigin(size.x / 2, size.y / 2);
 	particle.setFillColor(Color::White);
 	particle.setTexture(&particleTexture);
-	particle.setPosition(position);
+	particle.setPosition(startPosition);
 	bounds = particle.getGlobalBounds();
 }
 
+void Particle::setActive(bool state) {
+	isActive = state;
+}
+
 void Particle::update(float dt) {
+	if (alphaValue >= 0) {
+		alphaValue -= decreaseAlpha*dt;
+		particle.setFillColor(Color(255, 255, 255, alphaValue));
+	}
 	particle.move(direction.x*velocity*dt, direction.y*velocity*dt);
 }
 
 void Particle::draw(RenderWindow & window) {
-	window.draw(particle);
+	if(isActive)
+		window.draw(particle);
 }
 
 void Particle::resetParticle() {
-	particle.setPosition(position);
+	particle.setPosition(startPosition);
+	particle.setFillColor(Color::White);
+	alphaValue = 255;
 	lifetime = rand() % 10 + 1;
+	angle = rand() % (emissionAngleRange.y + 1 - emissionAngleRange.x) + emissionAngleRange.x;
+	decreaseAlpha = alphaValue / lifetime;
 }

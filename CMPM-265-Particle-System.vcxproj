@@ -19,12 +19,17 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ExponentialBehavior.cpp" />
+    <ClCompile Include="LinearBehavior.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleManagerSystem.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Behavior.h" />
+    <ClInclude Include="ExponentialBehavior.h" />
+    <ClInclude Include="LinearBehavior.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="ParticleSystemManager.h" />

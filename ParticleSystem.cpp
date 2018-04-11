@@ -6,9 +6,10 @@ ParticleSystem::ParticleSystem() {
 
 ParticleSystem::ParticleSystem(Vector2f position, int emissionAngle, Texture particleTexture) {
 	pointEmitter = position; 
+	behavior = new ExponentialBehavior();
 	emissionAngleRange = Vector2i(-1 * emissionAngle - 90, emissionAngle - 90);
-	for (int i = 0; i < 110; i++) {
-		Particle* p = new Particle(pointEmitter, emissionAngleRange, particleTexture);
+	for (int i = 0; i < 10100; i++) {
+		Particle* p = new Particle(pointEmitter, emissionAngleRange, particleTexture, behavior);
 		aliveParticles.push_back(p);
 		aliveParticles[i]->init();
 		if (i >= 0 && i < minCount) {
@@ -17,6 +18,13 @@ ParticleSystem::ParticleSystem(Vector2f position, int emissionAngle, Texture par
 		}
 	}
 	cout << aliveParticles.size() << endl;
+}
+
+ParticleSystem::~ParticleSystem() {
+	for (int i = 0; i < aliveParticles.size(); i++) {
+		delete aliveParticles[i];
+		aliveParticles[i] = nullptr;
+	}
 }
 
 void ParticleSystem::addParticles(int count) {
@@ -39,9 +47,9 @@ void ParticleSystem::reduceParticles(int count) {
 void ParticleSystem::update(float dt) {
 	for (int i = 0; i < aliveCount; i++) {
 		Particle* p = aliveParticles[i];
-		p->lifetime -= dt;
+		p->currLifetime -= dt;
 
-		if (p->lifetime <= 0)
+		if (p->currLifetime <= 0)
 			p->resetParticle();
 
 		p->update(dt);
@@ -49,13 +57,13 @@ void ParticleSystem::update(float dt) {
 
 	//check for key presses
 	if (Keyboard::isKeyPressed(Keyboard::Add) && aliveCount < maxCount && !isAddPressed) {
-		addParticles(10);
+		addParticles(50);
 		isAddPressed = true;
 	}
 	else if(!Keyboard::isKeyPressed(Keyboard::Add) && isAddPressed)
 		isAddPressed = false;
 	if (Keyboard::isKeyPressed(Keyboard::Subtract) && aliveCount > minCount && !isSubtractPressed) {
-		reduceParticles(10);
+		reduceParticles(50);
 		isSubtractPressed = true;
 	}
 	else if(!Keyboard::isKeyPressed(Keyboard::Subtract) && isSubtractPressed)

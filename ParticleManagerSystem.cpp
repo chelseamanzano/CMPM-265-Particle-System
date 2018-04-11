@@ -1,8 +1,8 @@
 #include "ParticleSystemManager.h"
 
 ParticleSystemManager::ParticleSystemManager() {
-	smoke.loadFromFile("resources/smoke-particle.png");
-	explosion.loadFromFile("resources/explosion-particle.png");
+	smoke.loadFromFile("resources/smoke-particle-1.png");
+	explosion.loadFromFile("resources/explosion-particle-1.png");
 	ParticleSystem* ps1 = new ParticleSystem(Vector2f(200, 300), 20, smoke);
 	particleSystems.push_back(ps1);
 	ParticleSystem* ps2 = new ParticleSystem(Vector2f(600, 300), 90, explosion);

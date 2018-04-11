@@ -15,7 +15,7 @@ void render_frame(RenderWindow & window, ParticleSystemManager & psm);
 
 int main()
 {
-	sf::RenderWindow window(sf::VideoMode(800, 600), "CMPM-265 | Particle System | Chelsea Manzano");
+	sf::RenderWindow window(sf::VideoMode(1280, 600), "CMPM-265 | Particle System | Chelsea Manzano");
 
 	srand(static_cast<unsigned>(time(NULL)));
 

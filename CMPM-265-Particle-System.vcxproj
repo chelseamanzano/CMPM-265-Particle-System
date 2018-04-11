@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ExponentialBehavior.cpp" />
     <ClCompile Include="QuadraticBehavior.cpp" />
     <ClCompile Include="QuarticBehavior.cpp" />
     <ClCompile Include="LinearBehavior.cpp" />
@@ -30,6 +31,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Behavior.h" />
+    <ClInclude Include="ExponentialBehavior.h" />
     <ClInclude Include="QuadraticBehavior.h" />
     <ClInclude Include="QuarticBehavior.h" />
     <ClInclude Include="LinearBehavior.h" />

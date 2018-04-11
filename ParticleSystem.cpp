@@ -8,7 +8,7 @@ ParticleSystem::ParticleSystem(Vector2f position, int emissionAngle, Texture par
 	pointEmitter = position;
 	emissionAngleRange = Vector2i(-1 * emissionAngle - 90, emissionAngle - 90);
 	for (int i = 0; i < 10100; i++) {
-		int behaviorType = rand() % 4 + 1;
+		int behaviorType = rand() % 5 + 1;
 		if (behaviorType == 1)
 			behavior = new LinearBehavior();
 		else if (behaviorType == 2)
@@ -17,6 +17,8 @@ ParticleSystem::ParticleSystem(Vector2f position, int emissionAngle, Texture par
 			behavior = new QuadraticBehavior();
 		else if (behaviorType == 4)
 			behavior = new SinusoidalBehavior();
+		else if (behaviorType == 5)
+			behavior = new ExponentialBehavior();
 		Particle* p = new Particle(pointEmitter, emissionAngleRange, particleTexture, behavior);
 		aliveParticles.push_back(p);
 		aliveParticles[i]->init();

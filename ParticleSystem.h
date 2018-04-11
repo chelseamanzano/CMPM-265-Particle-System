@@ -6,6 +6,7 @@
 #include "QuarticBehavior.h"
 #include "QuadraticBehavior.h"
 #include "SinusoidalBehavior.h"
+#include "ExponentialBehavior.h"
 
 using namespace sf;
 using namespace std;

@@ -5,10 +5,18 @@ ParticleSystem::ParticleSystem() {
 }
 
 ParticleSystem::ParticleSystem(Vector2f position, int emissionAngle, Texture particleTexture) {
-	pointEmitter = position; 
-	behavior = new ExponentialBehavior();
+	pointEmitter = position;
 	emissionAngleRange = Vector2i(-1 * emissionAngle - 90, emissionAngle - 90);
 	for (int i = 0; i < 10100; i++) {
+		int behaviorType = rand() % 4 + 1;
+		if (behaviorType == 1)
+			behavior = new LinearBehavior();
+		else if (behaviorType == 2)
+			behavior = new QuarticBehavior();
+		else if (behaviorType == 3)
+			behavior = new QuadraticBehavior();
+		else if (behaviorType == 4)
+			behavior = new SinusoidalBehavior();
 		Particle* p = new Particle(pointEmitter, emissionAngleRange, particleTexture, behavior);
 		aliveParticles.push_back(p);
 		aliveParticles[i]->init();
@@ -17,7 +25,6 @@ ParticleSystem::ParticleSystem(Vector2f position, int emissionAngle, Texture par
 			aliveCount++;
 		}
 	}
-	cout << aliveParticles.size() << endl;
 }
 
 ParticleSystem::~ParticleSystem() {
@@ -47,9 +54,9 @@ void ParticleSystem::reduceParticles(int count) {
 void ParticleSystem::update(float dt) {
 	for (int i = 0; i < aliveCount; i++) {
 		Particle* p = aliveParticles[i];
-		p->currLifetime -= dt;
+		p->currLifetime += dt;
 
-		if (p->currLifetime <= 0)
+		if (p->currLifetime >= p->initLifetime)
 			p->resetParticle();
 
 		p->update(dt);

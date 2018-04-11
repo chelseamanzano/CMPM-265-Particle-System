@@ -7,15 +7,16 @@ using namespace std;
 
 class ParticleSystemManager {
 private:
-	Texture smoke, explosion;
-	Texture cigaretteTexture, candleTexture;
-	RectangleShape cigarette, candle;
+	Texture smoke, explosion, fire;
+	Texture cigaretteTexture, candleTexture, dragonTexture;
+	RectangleShape cigarette, candle, dragon;
 	vector<ParticleSystem*> particleSystems;
 
 public:
 	ParticleSystemManager();
 	void initCigarette();
 	void initCandle();
+	void initDragon();
 	void update(float dt);
 	void draw(RenderWindow & window);
 };

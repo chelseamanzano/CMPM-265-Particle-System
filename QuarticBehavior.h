@@ -1,12 +1,11 @@
 #pragma once
 
 #include "Behavior.h"
-#include <iostream>
+#include <math.h>
 
 using namespace std;
 
-
-class LinearBehavior : public Behavior {
+class QuarticBehavior : public Behavior {
 public:
 	virtual float behavior_at_time(float minValue, float changeValue, float currLifetime, float maxLifetime);
 };

@@ -3,12 +3,16 @@
 ParticleSystemManager::ParticleSystemManager() {
 	smoke.loadFromFile("resources/smoke-particle-1.png");
 	explosion.loadFromFile("resources/explosion-particle-1.png");
-	ParticleSystem* ps1 = new ParticleSystem(Vector2f(200, 300), 20, smoke);
+	fire.loadFromFile("resources/fire-particle-1.png");
+	ParticleSystem* ps1 = new ParticleSystem(Vector2f(200, 500), 20, smoke);
 	particleSystems.push_back(ps1);
-	ParticleSystem* ps2 = new ParticleSystem(Vector2f(600, 300), 90, explosion);
+	ParticleSystem* ps2 = new ParticleSystem(Vector2f(600, 500), 90, explosion);
 	particleSystems.push_back(ps2);
+	ParticleSystem* ps3 = new ParticleSystem(Vector2f(1000, 500), 45, fire);
+	particleSystems.push_back(ps3);
 	initCigarette();
 	initCandle();
+	initDragon();
 }
 
 void ParticleSystemManager::initCigarette() {
@@ -17,7 +21,7 @@ void ParticleSystemManager::initCigarette() {
 	cigarette.setOrigin(50, 50);
 	cigarette.setFillColor(Color::White);
 	cigarette.setTexture(&cigaretteTexture);
-	cigarette.setPosition(235, 305);
+	cigarette.setPosition(235, 505);
 }
 
 void ParticleSystemManager::initCandle() {
@@ -26,7 +30,16 @@ void ParticleSystemManager::initCandle() {
 	candle.setOrigin(50, 50);
 	candle.setFillColor(Color::White);
 	candle.setTexture(&candleTexture);
-	candle.setPosition(610, 350);
+	candle.setPosition(610, 550);
+}
+
+void ParticleSystemManager::initDragon() {
+	dragonTexture.loadFromFile("resources/dragon.png");
+	dragon.setSize(Vector2f(100, 100));
+	dragon.setOrigin(50, 50);
+	dragon.setFillColor(Color::White);
+	dragon.setTexture(&dragonTexture);
+	dragon.setPosition(1000, 530);
 }
 
 void ParticleSystemManager::update(float dt) {
@@ -41,4 +54,5 @@ void ParticleSystemManager::draw(RenderWindow & window) {
 	}
 	window.draw(cigarette);
 	window.draw(candle);
+	window.draw(dragon);
 }

@@ -19,20 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ExponentialBehavior.cpp" />
+    <ClCompile Include="QuadraticBehavior.cpp" />
+    <ClCompile Include="QuarticBehavior.cpp" />
     <ClCompile Include="LinearBehavior.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="ParticleManagerSystem.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
+    <ClCompile Include="SinusoidalBehavior.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Behavior.h" />
-    <ClInclude Include="ExponentialBehavior.h" />
+    <ClInclude Include="QuadraticBehavior.h" />
+    <ClInclude Include="QuarticBehavior.h" />
     <ClInclude Include="LinearBehavior.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="ParticleSystem.h" />
     <ClInclude Include="ParticleSystemManager.h" />
+    <ClInclude Include="SinusoidalBehavior.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

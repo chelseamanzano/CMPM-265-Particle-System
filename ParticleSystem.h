@@ -3,7 +3,9 @@
 #include "Particle.h"
 #include "Behavior.h"
 #include "LinearBehavior.h"
-#include "ExponentialBehavior.h"
+#include "QuarticBehavior.h"
+#include "QuadraticBehavior.h"
+#include "SinusoidalBehavior.h"
 
 using namespace sf;
 using namespace std;

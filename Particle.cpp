@@ -7,10 +7,10 @@ Particle::Particle(Vector2f position, Vector2i emissionAngleRange, Texture parti
 	startPosition = position;
 	initVelocity = rand() % 20 + minVelocity;
 	currVelocity = initVelocity;
-	initSize = Vector2f(30,30);
+	initSize = Vector2f(minSize, minSize);
 	currSize = initSize;
 	initLifetime = rand() % 5 + 1;
-	currLifetime = initLifetime;
+	currLifetime = 0;
 	decreaseAlpha = alphaValue / initLifetime;
 	this->emissionAngleRange = emissionAngleRange;
     angle = rand() % (emissionAngleRange.y + 1 - emissionAngleRange.x) + emissionAngleRange.x;
@@ -36,9 +36,9 @@ void Particle::update(float dt) {
 		alphaValue -= decreaseAlpha*dt;
 		particle.setFillColor(Color(255, 255, 255, alphaValue));
 	}
-	currSize.x += behavior->behavior_at_time(currSize.x / maxSize, initLifetime, currLifetime)*dt;
-	currSize.y += behavior->behavior_at_time(currSize.y / maxSize, initLifetime, currLifetime)*dt;
-	currVelocity += behavior->behavior_at_time(currVelocity / maxVelocity, initLifetime, currLifetime)*dt;
+	currSize.x = behavior->behavior_at_time(initSize.x, maxSize-minSize, currLifetime, initLifetime);
+	currSize.y = behavior->behavior_at_time(initSize.y, maxSize- minSize, currLifetime, initLifetime);
+	currVelocity = behavior->behavior_at_time(initVelocity, maxVelocity - initVelocity, currLifetime, initLifetime);
 	particle.setOrigin(currSize.x / 2, currSize.y / 2);
 	particle.setSize(currSize);
 	particle.rotate(currVelocity*dt);
@@ -55,7 +55,7 @@ void Particle::resetParticle() {
 	particle.setFillColor(Color::White);
 	alphaValue = 255;
 	initLifetime = rand() % 5 + 1;
-	currLifetime = initLifetime;
+	currLifetime = 0;
 	angle = rand() % (emissionAngleRange.y + 1 - emissionAngleRange.x) + emissionAngleRange.x;
 	decreaseAlpha = alphaValue / initLifetime;
 	currSize = initSize;

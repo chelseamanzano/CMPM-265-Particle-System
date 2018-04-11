@@ -30,7 +30,13 @@
     <ClCompile Include="LinearBehavior.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ExponentialBehavior.cpp">
+    <ClCompile Include="QuarticBehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="QuadraticBehavior.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SinusoidalBehavior.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -50,7 +56,13 @@
     <ClInclude Include="LinearBehavior.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ExponentialBehavior.h">
+    <ClInclude Include="QuarticBehavior.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="QuadraticBehavior.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SinusoidalBehavior.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

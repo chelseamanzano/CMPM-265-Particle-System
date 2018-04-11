@@ -18,7 +18,7 @@ private:
 	float minVelocity = 20;
 	float maxVelocity = 100;
 	float minSize = 30;
-	float maxSize = 200;
+	float maxSize = 100;
 	float angle;
 	float alphaValue = 255;
 	float decreaseAlpha;
